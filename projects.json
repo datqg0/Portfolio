@@ -1,0 +1,110 @@
+[
+  {
+    "id": "1",
+    "title": {
+      "vi": "LAC BLOCK",
+      "en": "LAC BLOCK"
+    },
+    "subtitle": {
+      "vi": "2D Puzzle Game (Solo)",
+      "en": "2D Puzzle Game (Solo)"
+    },
+    "desc": {
+      "vi": "Game giải đố khối 2D trên PC lấy cảm hứng từ Block Blast với cơ chế độc đáo.",
+      "en": "Casual 2D block puzzle game on PC inspired by Block Blast with unique mechanics."
+    },
+    "bullets": {
+      "vi": [
+        "Thiết kế game giải đố khối casual lấy cảm hứng từ Block Blast với các cơ chế độc đáo (chim Lạc bay và buff Mặt Trời & Mặt Trăng).",
+        "Áp dụng thuật toán Quay lui (Backtracking) để sinh hình dạng khối và mô hình Singleton quản lý UI, âm thanh, tính điểm, hướng dẫn, hệ thống lưới và gameplay chính."
+      ],
+      "en": [
+        "Designed a casual block puzzle game inspired by Block Blast with unique mechanics (flying lac bird and Sun & Moon buffs).",
+        "Implemented Backtracking algorithm for block shape spawning and a Singleton pattern to manage UI, audio, scoring, grid system, and core gameplay."
+      ]
+    },
+    "techs": [
+      "Unity",
+      "C#",
+      "PC",
+      "Backtracking Algorithm"
+    ],
+    "links": [
+      { "name": "Itch.io", "url": "https://datqg0.itch.io/lac-block/" },
+      { "name": "YouTube Demo", "url": "https://youtu.be/mAam-6LcmzM" }
+    ],
+    "status": "done"
+  },
+  {
+    "id": "2",
+    "title": {
+      "vi": "LAC Fly",
+      "en": "LAC Fly"
+    },
+    "subtitle": {
+      "vi": "2D Casual Game (Solo)",
+      "en": "2D Casual Game (Solo)"
+    },
+    "desc": {
+      "vi": "Game chạy vô tận 2D điều khiển chim Lạc vượt chướng ngại vật.",
+      "en": "2D endless runner game featuring a lac bird navigating obstacles."
+    },
+    "bullets": {
+      "vi": [
+        "Game dạng endless runner điều khiển chim Lạc vượt chướng ngại vật, lấy cảm hứng từ Flappy Bird.",
+        "Phát triển bộ điều khiển nhân vật (player controller), hệ thống giao diện UI, hoạt họa sprite và quản lý âm thanh."
+      ],
+      "en": [
+        "Endless runner game featuring a lac bird navigating obstacles, inspired by Flappy Bird.",
+        "Developed player controller, UI system, sprite animations, and audio management."
+      ]
+    },
+    "techs": [
+      "Cocos Creator",
+      "TypeScript",
+      "Sprite Animation",
+      "Audio System"
+    ],
+    "links": [
+      { "name": "Itch.io", "url": "https://datqg0.itch.io/lac-fly" },
+      { "name": "YouTube Demo", "url": "https://youtu.be/e2LGoSMjKQ4" }
+    ],
+    "status": "done"
+  },
+  {
+    "id": "3",
+    "title": {
+      "vi": "BOMB BREAK",
+      "en": "BOMB BREAK"
+    },
+    "subtitle": {
+      "vi": "3D Puzzle Game (Solo)",
+      "en": "3D Puzzle Game (Solo)"
+    },
+    "desc": {
+      "vi": "Game gỡ bom 3D kịch tính — tìm mật khẩu, bấm nút và cắt dây đúng thứ tự.",
+      "en": "Tense 3D bomb defusal puzzle game — find the password, press activate, and cut wires in order."
+    },
+    "bullets": {
+      "vi": [
+        "Gỡ bom bằng cách giải các câu đố đơn giản nhưng căng thẳng: tìm mật khẩu đúng, nhấn nút kích hoạt và cắt dây theo đúng thứ tự. Mỗi sai lầm sẽ đưa bạn đến gần hơn với thảm họa!",
+        "Dự án tham gia GMTK Global Game Jam đầu tiên của tôi."
+      ],
+      "en": [
+        "Defuse bombs by solving simple but tense puzzles. Discover the correct password, press the activation button, and cut the wires in the right order. Every mistake brings you one step closer to disaster. Stay focused and beat every level!",
+        "My First GMTK Global Game Jam."
+      ]
+    },
+    "techs": [
+      "Unity 6",
+      "C#",
+      "3D Puzzle",
+      "GMTK Game Jam"
+    ],
+    "links": [
+      { "name": "Itch.io", "url": "https://datqg0.itch.io/bomb-break" },
+      { "name": "YouTube Demo", "url": "https://youtu.be/n5KUEybZHec" }
+    ],
+    "status": "done"
+  }
+]

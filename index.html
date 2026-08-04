@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dattqg — Portfolio Sổ Tay Bản Vẽ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #EDE6D6;
+      --paper-line: #d9cfb7;
+      --ink: #232220;
+      --ink-soft: #524d44;
+      --pencil-blue: #3C6E96;
+      --pencil-blue-dim: #7FA6C2;
+      --red-pen: #B23A2E;
+      --sticky: #E8C468;
+      --card: #F7F2E6;
+      --shadow: rgba(35, 34, 32, 0.18);
+      --green-ok: #4c7a4c;
+      --yellow-idea: #d68a1f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--paper-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+      background-size: 28px 28px;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.55;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 40px 0 32px;
+      border-bottom: 3px solid var(--ink);
+      margin-bottom: 36px;
+    }
+
+    .hero .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--pencil-blue);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: clamp(34px, 6vw, 58px);
+      margin: 0 0 14px;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--red-pen);
+      font-weight: 500;
+    }
+
+    .hero p.lede {
+      max-width: 720px;
+      font-size: 17px;
+      color: var(--ink-soft);
+      margin: 0 0 20px;
+    }
+
+    .stamp {
+      position: absolute;
+      top: 28px;
+      right: 0;
+      border: 2px solid var(--red-pen);
+      color: var(--red-pen);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 12px;
+      transform: rotate(6deg);
+      letter-spacing: .06em;
+      background: rgba(178, 58, 46, 0.05);
+      text-align: center;
+    }
+
+    .stats {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .stat {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat b {
+      display: block;
+      font-size: 22px;
+      color: var(--ink);
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    /* SPLIT LAYOUT */
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    /* LEFT COLUMN: MODEL VISUALIZER */
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .sticky-note {
+      background: var(--sticky);
+      border: 1.5px solid var(--ink);
+      padding: 20px 24px;
+      box-shadow: 5px 5px 0 var(--shadow);
+      transform: rotate(-1deg);
+      position: relative;
+    }
+
+    .sticky-note::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 40%;
+      width: 80px;
+      height: 25px;
+      background: rgba(255, 255, 255, 0.4);
+      transform: rotate(2deg);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .sticky-note h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      margin: 0 0 10px;
+      color: var(--ink);
+    }
+
+    .sticky-note p {
+      margin: 0 0 12px;
+      font-size: 14.5px;
+      color: var(--ink);
+    }
+
+    .sticky-note .socials {
+      display: flex;
+      gap: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .sticky-note .socials a {
+      color: var(--red-pen);
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    /* 3D CANVAS — Frameless, floats directly on page */
+    .model-card {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .model-body {
+      height: 620px;
+      position: relative;
+      outline: none;
+      overflow: visible;
+      background: transparent;
+    }
+
+    #canvas-3d {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+      background: transparent;
+    }
+
+    #canvas-3d:active {
+      cursor: grabbing;
+    }
+
+    /* 3D Controls and HUD */
+    .model-hud {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .hud-btn {
+      background: var(--card);
+      border: 1px solid var(--ink);
+      padding: 5px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      pointer-events: auto;
+      box-shadow: 2px 2px 0 var(--shadow);
+    }
+
+    .hud-btn:hover {
+      background: var(--paper);
+    }
+
+    .hud-btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0 var(--shadow);
+    }
+
+    .loader-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(237, 230, 214, 0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      transition: opacity 0.6s ease;
+      z-index: 10;
+      border-radius: 2px;
+    }
+
+    .loader-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--paper-line);
+      border-top: 3px solid var(--pencil-blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 16px;
+    }
+
+    .loader-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--ink);
+    }
+
+    .loader-subtext {
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-top: 8px;
+      max-width: 280px;
+    }
+
+    .file-dropzone {
+      border: 1.5px dashed var(--pencil-blue-dim);
+      background: rgba(60, 110, 150, 0.03);
+      padding: 12px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--pencil-blue);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .file-dropzone:hover {
+      background: rgba(60, 110, 150, 0.08);
+    }
+
+    /* RIGHT COLUMN: PROJECTS list */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .progress-wrap {
+      background: var(--card);
+      border: 1.5px solid var(--ink);
+      padding: 16px 20px;
+      box-shadow: 4px 4px 0 var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .progress-track {
+      flex: 1;
+      min-width: 180px;
+      height: 14px;
+      background: #e2d9c2;
+      border: 1px solid var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--pencil-blue), var(--green-ok));
+      transition: width .35s ease;
+    }
+
+    #progress-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* Filter buttons */
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .filter-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: var(--card);
+      border: 1.5px solid var(--ink);
+      padding: 6px 12px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--shadow);
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn.active {
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: none;
+      transform: translate(2px, 2px);
+    }
+
+    .filter-btn:hover:not(.active) {
+      background: var(--paper-line);
+    }
+
+    /* Project Grid / List */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .project-item {
+      background: var(--card);
+      border: 1.5px solid var(--ink);
+      padding: 18px 20px;
+      box-shadow: 3px 3px 0 var(--shadow);
+      display: flex;
+      gap: 16px;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 5px 5px 0 var(--shadow);
+    }
+
+    /* Project Status colors */
+    .project-item.done {
+      border-left: 6px solid var(--green-ok);
+    }
+
+    .project-item.doing {
+      border-left: 6px solid var(--pencil-blue);
+    }
+
+    .project-item.idea {
+      border-left: 6px solid var(--yellow-idea);
+    }
+
+    .prj-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border: 1px solid var(--ink);
+      text-transform: uppercase;
+      align-self: flex-start;
+    }
+
+    .badge-idea {
+      background: #fef5e7;
+      color: var(--yellow-idea);
+      border-color: var(--yellow-idea);
+    }
+
+    .badge-doing {
+      background: #eef5fc;
+      color: var(--pencil-blue);
+      border-color: var(--pencil-blue);
+    }
+
+    .badge-done {
+      background: #eef2e6;
+      color: var(--green-ok);
+      border-color: var(--green-ok);
+    }
+
+    .prj-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .prj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .prj-title {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .prj-subtitle {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--pencil-blue);
+      margin: 2px 0 8px 0;
+      font-weight: 500;
+    }
+
+    .prj-desc {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin: 0 0 8px 0;
+    }
+
+    .prj-bullets {
+      margin: 4px 0 10px 0;
+      padding-left: 18px;
+      font-size: 13.5px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .prj-bullets li {
+      margin-bottom: 4px;
+    }
+
+    .prj-links {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      margin-bottom: 10px;
+      color: var(--ink-soft);
+    }
+
+    .prj-links a {
+      color: var(--red-pen);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .prj-techs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--pencil-blue);
+    }
+
+    .prj-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .action-btn:hover {
+      color: var(--red-pen);
+    }
+
+    /* Creator / Add form */
+    .add-card {
+      background: var(--card);
+      border: 1.5px dashed var(--ink);
+      padding: 20px;
+      box-shadow: 3px 3px 0 var(--shadow);
+    }
+
+    .add-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      margin: 0 0 14px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .form-control {
+      width: 100%;
+      background: #fff;
+      border: 1.5px solid var(--ink);
+      padding: 8px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--pencil-blue);
+    }
+
+    select.form-control {
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      background: var(--ink);
+      color: var(--paper);
+      border: 1.5px solid var(--ink);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.15s;
+    }
+
+    .submit-btn:hover {
+      background: var(--red-pen);
+      border-color: var(--red-pen);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-soft);
+      border-top: 1.5px dashed var(--paper-line);
+      padding-top: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .stamp {
+        position: static;
+        display: inline-block;
+        margin-top: 14px;
+        transform: rotate(-2deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div style="text-align: right; margin-bottom: -20px; z-index: 100; position: relative;">
+      <button onclick="setLang('vi')"
+        style="cursor: pointer; font-family: 'JetBrains Mono'; border: 1.5px solid var(--ink); background: var(--card); padding: 4px 8px;">VI</button>
+      <button onclick="setLang('en')"
+        style="cursor: pointer; font-family: 'JetBrains Mono'; border: 1.5px solid var(--ink); background: var(--card); padding: 4px 8px;">EN</button>
+    </div>
+
+    <!-- HERO HEADER -->
+    <div class="hero">
+      <div class="stamp" data-i18n="stamp">HỒ SƠ CÁ NHÂN<br>BẢN PHÁC THẢO</div>
+
+      <div style="display: flex; gap: 24px; align-items: center; margin-bottom: 20px;">
+        <div class="avatar-wrap" style="flex-shrink: 0;">
+          <!-- Đổi tên file ảnh của bạn thành avatar.png và để cùng thư mục -->
+          <img src="avatar.png" alt="Avatar"
+            style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2.5px dashed var(--pencil-blue); padding: 4px; background: var(--card); box-shadow: 4px 4px 0 var(--shadow);">
+        </div>
+        <div>
+          <div class="eyebrow" data-i18n="eyebrow" style="margin-bottom: 8px;">Unity Developer & Noob Artist</div>
+          <h1 data-i18n="name" style="margin: 0;">Nguyễn Hữu Đạt <em>(datqg0)</em></h1>
+        </div>
+      </div>
+
+      <p class="lede" data-i18n="intro">Chào mừng đến với sổ tay phác thảo của tôi. Tôi là một Game Developer (Unity)
+        kiêm họa sĩ nghiệp
+        dư (Noob Artist), thành thạo C++, C#, thuật toán và thiết kế trải nghiệm game tương tác. Dưới đây là mô hình 3D
+        cá nhân và danh sách các dự án tôi đang thực hiện.</p>
+
+      <!-- Video Giới thiệu -->
+      <div class="video-wrap" style="margin-top: 24px; margin-bottom: 24px;">
+        <!-- Bạn lưu file video dưới tên intro.mp4 và đặt cùng thư mục nhé -->
+        <video controls
+          style="width: 100%; max-height: 400px; object-fit: cover; border: 2px solid var(--ink); box-shadow: 5px 5px 0 var(--shadow); background: #000;">
+          <source src="intro.mp4" type="video/mp4">
+          Trình duyệt của bạn không hỗ trợ phát video.
+        </video>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="stat-total">0</b><span data-i18n="stat_total">Tổng Dự án</span></div>
+        <div class="stat"><b id="stat-done">0</b><span data-i18n="stat_done">Hoàn thành</span></div>
+        <div class="stat"><b id="stat-rate">0%</b><span data-i18n="stat_rate">Tỷ lệ hoàn tất</span></div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- LEFT SIDE: MODEL & INFO -->
+      <div class="left-col">
+
+        <!-- Profile Sticky Note -->
+        <div class="sticky-note">
+          <h3 data-i18n="contact_title">Thông tin liên hệ ✏️</h3>
+          <p data-i18n="contact_desc">Thông tin chi tiết và các kênh kết nối cá nhân:</p>
+          <div
+            style="font-size: 13.5px; line-height: 1.6; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace;"
+            data-i18n="contact_info_text">
+            📍 <b>Địa chỉ:</b> Hà Nội, Việt Nam &nbsp;|&nbsp; 📞 <b>SĐT:</b> 0354886592 &nbsp;|&nbsp; ✉️ <b>Email:</b>
+            <a href="mailto:datqg0@gmail.com" style="color: var(--red-pen);">datqg0@gmail.com</a>
+          </div>
+          <div class="socials" style="flex-wrap: wrap;">
+            <a href="https://datqg0.itch.io/" target="_blank">datqg0.itch.io</a> ·
+            <a href="https://github.com/datqg0" target="_blank">github.com/datqg0</a> ·
+            <a href="https://codeforces.com/profile/datqg0" target="_blank">Codeforces</a> ·
+            <a href="https://www.linkedin.com/in/h%E1%BB%AFu-%C4%91%E1%BA%A1t-nguy%E1%BB%85n-864419246/"
+              target="_blank">LinkedIn</a> ·
+            <a href="https://oj.vnoi.info/user/Datqg" target="_blank">VNOI</a>
+          </div>
+        </div>
+
+        <!-- Education Card -->
+        <div class="intro-card"
+          style="background: var(--card); border: 1.5px solid var(--ink); padding: 18px 20px; box-shadow: 4px 4px 0 var(--shadow);">
+          <h3 data-i18n="education_title"
+            style="font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 10px; color: var(--pencil-blue);">Học
+            vấn 🎓</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6;">
+            <li data-i18n="edu_major"><b>Ngành Công nghệ Thông tin</b> (2022 – 2027)</li>
+            <li data-i18n="edu_school">Trường Đại học Kiến trúc Hà Nội (HAU)</li>
+            <li data-i18n="edu_gpa"><b>GPA:</b> 3.6 / 4.0</li>
+          </ul>
+        </div>
+
+        <!-- Skills Card -->
+        <div class="intro-card"
+          style="background: var(--card); border: 1.5px solid var(--ink); padding: 18px 20px; box-shadow: 4px 4px 0 var(--shadow);">
+          <h3 data-i18n="skills_title"
+            style="font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 10px; color: var(--pencil-blue);">Kỹ
+            năng chuyên môn 🛠️</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6;">
+            <li data-i18n="skill_game"><b>Game Engines:</b> Unity (2D & 3D), Cocos Creator</li>
+            <li data-i18n="skill_lang"><b>Ngôn ngữ:</b> C#, C++, TypeScript, JavaScript</li>
+            <li data-i18n="skill_systems"><b>Engine Systems:</b> Physics, Transform, Coroutine, UI Toolkit, Particle
+              System, Sound, Animation, ScriptableObjects, PlayerPrefs</li>
+            <li data-i18n="skill_arch"><b>Kiến trúc & Thuật toán:</b> Data Structures, Algorithms, OOP, Singleton
+              Pattern, Object Pooling</li>
+            <li data-i18n="skill_tools"><b>Công cụ:</b> Git, GitHub, Blender (Cơ bản)</li>
+          </ul>
+        </div>
+
+        <!-- Awards Card -->
+        <div class="intro-card"
+          style="background: var(--card); border: 1.5px solid var(--ink); padding: 18px 20px; box-shadow: 4px 4px 0 var(--shadow);">
+          <h3 data-i18n="awards_title"
+            style="font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 10px; color: var(--red-pen);">Thành
+            tích & Hoạt động 🏆</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6;">
+            <li data-i18n="award_1">Junior Programmer Pathway — Unity Learn (2026)</li>
+            <li data-i18n="award_2">Olympic Tin học Sinh viên Việt Nam — Giải Nhì (Top 28) (2024)</li>
+            <li data-i18n="award_3">Olympic Tin học Sinh viên Việt Nam (Khối B) — Giải Ba (Top 100) (2024)</li>
+            <li data-i18n="award_4">GMTK Global Game Jam 2026 — Top 5000 Toàn cầu (2026)</li>
+            <li data-i18n="award_5">HAU Game Jam 2026 — Top 4 Toàn đoàn (2026)</li>
+          </ul>
+        </div>
+
+        <!-- Additional Info Card -->
+        <div class="intro-card"
+          style="background: var(--card); border: 1.5px solid var(--ink); padding: 18px 20px; box-shadow: 4px 4px 0 var(--shadow);">
+          <h3 data-i18n="additional_title"
+            style="font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 10px; color: var(--pencil-blue);">Thông
+            tin thêm 📌</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6;">
+            <li data-i18n="add_languages"><b>Ngoại ngữ:</b> Tiếng Việt (Bản ngữ), Tiếng Anh (B1 — TOEIC 620)</li>
+            <li data-i18n="add_interests"><b>Sở thích:</b> Thiết kế Game, Mỹ thuật truyền thống, Lập trình thi đấu, Đóng
+              góp mã nguồn mở</li>
+          </ul>
+        </div>
+
+        <!-- 3D Viewer Container (Frameless) -->
+        <div class="model-card">
+          <div class="model-body" id="model-container">
+            <!-- Loader overlay -->
+            <div class="loader-overlay" id="loader">
+              <div class="loader-spinner"></div>
+              <div class="loader-text" id="loader-title" data-i18n="loader_title">Đang khởi tạo trình xem 3D...</div>
+              <div class="loader-subtext" id="loader-desc" data-i18n="loader_desc">Đang tải tài nguyên Three.js và phân
+                tích file mô hình.</div>
+            </div>
+
+            <!-- 3D Canvas -->
+            <canvas id="canvas-3d"></canvas>
+
+            <!-- HUD (Format tag) -->
+            <div class="model-hud">
+              <div class="hud-btn" id="format-tag" data-i18n="format_tag">Đang tải...</div>
+              <div class="hud-btn" id="coords-tag" style="margin-left: 8px;">X: 0.00 Y: 0.00 Z: 0.00</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE: PROJECTS LIST & MANAGER -->
+      <div class="right-col">
+
+        <!-- Progress Bar Tracker -->
+        <div class="progress-wrap">
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-bar-fill"></div>
+          </div>
+          <div id="progress-label"><span id="p-done">0</span> / <span id="p-total">0</span> <span id="p-text"
+              data-i18n="progress_label">Dự án hoàn thành</span></div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Tất cả</button>
+          <button class="filter-btn" data-filter="idea" data-i18n="filter_idea">Ý tưởng 💡</button>
+          <button class="filter-btn" data-filter="doing" data-i18n="filter_doing">Đang làm ⚙️</button>
+          <button class="filter-btn" data-filter="done" data-i18n="filter_done">Hoàn thành ✓</button>
+        </div>
+
+        <!-- Project List Container -->
+        <div class="project-list" id="projects-container">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Add Project Card Form -->
+        <div class="add-card">
+          <h3 data-i18n="form_title">+ Phác thảo ý tưởng dự án mới</h3>
+          <form id="add-project-form">
+            <div class="form-group">
+              <label for="prj-name-input" data-i18n="form_name">Tên dự án</label>
+              <input type="text" id="prj-name-input" class="form-control" placeholder="Ví dụ: Landing Page 3D Canvas"
+                data-i18n-placeholder="form_name_placeholder" required>
+            </div>
+            <div class="form-group">
+              <label for="prj-desc-input" data-i18n="form_desc">Mô tả tóm tắt</label>
+              <textarea id="prj-desc-input" class="form-control" rows="2"
+                placeholder="Ví dụ: Thiết kế giao diện tương tác 3D dùng Three.js, phong cách tối giản."
+                data-i18n-placeholder="form_desc_placeholder" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="prj-tech-input" data-i18n="form_tech">Công nghệ / Công cụ (phân tách bằng dấu phẩy)</label>
+              <input type="text" id="prj-tech-input" class="form-control" placeholder="Ví dụ: Three.js, GSAP, CSS Grid"
+                data-i18n-placeholder="form_tech_placeholder">
+            </div>
+            <div class="form-group">
+              <label for="prj-status-input" data-i18n="form_status">Trạng thái ban đầu</label>
+              <select id="prj-status-input" class="form-control">
+                <option value="idea" data-i18n="status_idea">Ý tưởng (Idea) 💡</option>
+                <option value="doing" selected data-i18n="status_doing">Đang làm (Doing) ⚙️</option>
+                <option value="done" data-i18n="status_done">Hoàn thành (Done) ✓</option>
+              </select>
+            </div>
+            <button type="submit" class="submit-btn" data-i18n="form_submit">Đăng ký vào sổ tay</button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer>
+      <p data-i18n="footer">© 2026 dattqg. Được thiết kế theo phong cách phác thảo thủ công.</p>
+    </footer>
+  </div>
+
+  <!-- Load Three.js core and loaders from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.0/umd/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
+
+  <script>
+    // ==========================================
+    // 0. I18N SYSTEM (LANGUAGE TOGGLE)
+    // ==========================================
+    let translations = {};
+    let currentLang = localStorage.getItem('dattqg_lang') || 'vi';
+
+    fetch('i18n.json')
+      .then(response => response.json())
+      .then(data => {
+        translations = data;
+        setLang(currentLang);
+      })
+      .catch(err => console.error("Failed to load i18n data:", err));
+
+    function setLang(lang) {
+      if (!translations[lang]) return;
+      currentLang = lang;
+      localStorage.setItem('dattqg_lang', lang);
+
+      // Apply innerHTML
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      // Apply placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang][key]) {
+          el.setAttribute('placeholder', translations[lang][key]);
+        }
+      });
+
+      // Re-render dynamically created strings
+      renderProjects();
+    }
+
+    // ==========================================
+    // 1. PROJECT STATE MANAGEMENT (JSON + DRAFTS)
+    // ==========================================
+    let projects = [];
+    let activeFilter = 'all';
+
+    fetch('projects.json')
+      .then(res => res.json())
+      .then(data => {
+        projects = data;
+        // Merge with local drafts if any
+        try {
+          const saved = localStorage.getItem('dattqg_projects_drafts');
+          if (saved) {
+            const drafts = JSON.parse(saved);
+            projects = [...projects, ...drafts];
+          }
+        } catch (e) {
+          console.error("Local storage error:", e);
+        }
+        renderProjects();
+        updateStats();
+      })
+      .catch(err => console.error("Error loading projects.json:", err));
+
+    function saveProjects() {
+      // Chỉ lưu trữ tạm các dự án do người dùng tự nhập từ web (bản nháp)
+      const drafts = projects.filter(p => p.isDraft);
+      localStorage.setItem('dattqg_projects_drafts', JSON.stringify(drafts));
+      renderProjects();
+      updateStats();
+    }
+
+    function renderProjects() {
+      const container = document.getElementById('projects-container');
+      container.innerHTML = '';
+
+      const filtered = projects.filter(p => activeFilter === 'all' || p.status === activeFilter);
+
+      if (filtered.length === 0) {
+        const emptyText = translations[currentLang] ? translations[currentLang].no_projects : 'Không có dự án nào thuộc nhóm này. Hãy thêm mới bên dưới!';
+        container.innerHTML = `
+        <div style="text-align: center; padding: 32px; border: 1.5px dashed var(--ink-soft); background: var(--card);">
+          <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink-soft);">
+            ${emptyText}
+          </p>
+        </div>
+      `;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const item = document.createElement('div');
+        item.className = `project-item ${p.status}`;
+
+        let badgeClass = 'badge-idea';
+        let statusText = 'Ý tưởng 💡';
+
+        if (translations[currentLang]) {
+          if (p.status === 'idea') statusText = translations[currentLang].status_idea;
+          if (p.status === 'doing') statusText = translations[currentLang].status_doing;
+          if (p.status === 'done') statusText = translations[currentLang].status_done;
+        }
+
+        if (p.status === 'doing') { badgeClass = 'badge-doing'; }
+        if (p.status === 'done') { badgeClass = 'badge-done'; }
+
+        const techSpans = p.techs.map(t => `<span>#${t.trim()}</span>`).join(' ');
+
+        // Hỗ trợ hiển thị dự án cả dạng Object (i18n) lẫn String thường
+        const pTitle = typeof p.title === 'object' ? (p.title[currentLang] || p.title.vi) : p.title;
+        const pSubtitle = p.subtitle ? (typeof p.subtitle === 'object' ? (p.subtitle[currentLang] || p.subtitle.vi) : p.subtitle) : '';
+        const pDesc = typeof p.desc === 'object' ? (p.desc[currentLang] || p.desc.vi) : p.desc;
+
+        let bulletsHtml = '';
+        if (p.bullets) {
+          const bulletList = typeof p.bullets === 'object' && !Array.isArray(p.bullets) ? (p.bullets[currentLang] || p.bullets.vi) : p.bullets;
+          if (Array.isArray(bulletList) && bulletList.length > 0) {
+            bulletsHtml = `<ul class="prj-bullets">${bulletList.map(b => `<li>${b}</li>`).join('')}</ul>`;
+          }
+        }
+
+        let linksHtml = '';
+        if (p.links && Array.isArray(p.links) && p.links.length > 0) {
+          const linksText = p.links.map(l => `<a href="${l.url}" target="_blank">${l.name}</a>`).join(' · ');
+          linksHtml = `<div class="prj-links">🔗 <b>Links:</b> ${linksText}</div>`;
+        }
+
+        const subtitleHtml = pSubtitle ? `<div class="prj-subtitle">— ${pSubtitle}</div>` : '';
+
+        item.innerHTML = `
+        <div class="prj-content">
+          <div class="prj-header">
+            <div>
+              <h4 class="prj-title">${pTitle}</h4>
+              ${subtitleHtml}
+            </div>
+            <div class="prj-actions">
+              <span class="prj-badge ${badgeClass}">${statusText}</span>
+              <button class="action-btn btn-change-status" title="Đổi trạng thái" data-id="${p.id}">🔄</button>
+              <button class="action-btn btn-delete" title="Xoá dự án" data-id="${p.id}">❌</button>
+            </div>
+          </div>
+          <p class="prj-desc">${pDesc}</p>
+          ${bulletsHtml}
+          ${linksHtml}
+          <div class="prj-techs">${techSpans}</div>
+        </div>
+      `;
+        container.appendChild(item);
+      });
+
+      // Wire up events
+      document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.target.getAttribute('data-id');
+          projects = projects.filter(p => p.id !== id);
+          saveProjects();
+        });
+      });
+
+      document.querySelectorAll('.btn-change-status').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.target.getAttribute('data-id');
+          const prj = projects.find(p => p.id === id);
+          if (prj) {
+            if (prj.status === 'idea') prj.status = 'doing';
+            else if (prj.status === 'doing') prj.status = 'done';
+            else prj.status = 'idea';
+            saveProjects();
+          }
+        });
+      });
+    }
+
+    function updateStats() {
+      const total = projects.length;
+      const done = projects.filter(p => p.status === 'done').length;
+      const rate = total > 0 ? Math.round((done / total) * 100) : 0;
+
+      document.getElementById('stat-total').innerText = total;
+      document.getElementById('stat-done').innerText = done;
+      document.getElementById('stat-rate').innerText = `${rate}%`;
+
+      // Update progress bar
+      document.getElementById('progress-bar-fill').style.width = `${rate}%`;
+      const pDone = document.getElementById('p-done');
+      const pTotal = document.getElementById('p-total');
+      if (pDone && pTotal) {
+        pDone.innerText = done;
+        pTotal.innerText = total;
+      }
+    }
+
+    // Filter handles
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        activeFilter = e.target.getAttribute('data-filter');
+        renderProjects();
+      });
+    });
+
+    // Form handle
+    document.getElementById('add-project-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('prj-name-input').value;
+      const desc = document.getElementById('prj-desc-input').value;
+      const techsInput = document.getElementById('prj-tech-input').value;
+      const status = document.getElementById('prj-status-input').value;
+
+      const techs = techsInput ? techsInput.split(',').map(t => t.trim()).filter(t => t) : ["General"];
+
+      const newPrj = {
+        id: Date.now().toString(),
+        title: { vi: title, en: title },
+        desc: { vi: desc, en: desc },
+        techs,
+        status,
+        isDraft: true
+      };
+
+      projects.push(newPrj);
+      saveProjects();
+
+      // Reset form
+      e.target.reset();
+    });
+
+
+    // ==========================================
+    // 2. THREE.JS 3D MODEL LOADER SYSTEM
+    // ==========================================
+    let scene, camera, renderer, controls, currentModel;
+    let mixer = null;
+    let clock = new THREE.Clock();
+    let autoRotate = false;
+
+    const container = document.getElementById('model-container');
+    const canvas = document.getElementById('canvas-3d');
+    const loaderOverlay = document.getElementById('loader');
+    const loaderTitle = document.getElementById('loader-title');
+    const loaderDesc = document.getElementById('loader-desc');
+    const formatTag = document.getElementById('format-tag');
+
+    function init3D() {
+      // Scene setup
+      scene = new THREE.Scene();
+      // scene.background = new THREE.Color(0xfdfbf7); // Set to transparent
+
+      // Camera setup — wider FOV for a more cinematic framing
+      camera = new THREE.PerspectiveCamera(68, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+      camera.position.set(0, 2, 5);
+
+      // Renderer setup
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+      // Controls - enable orbit so user can rotate/zoom
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enabled = false; // Tắt thao tác chuột/tay
+      controls.enableZoom = false;
+      controls.enableRotate = false;
+      controls.enablePan = false;
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.08;
+      controls.minDistance = 1;
+      controls.maxDistance = 20;
+
+      // Lights
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+      scene.add(ambientLight);
+
+      // Key light (main, front-right-top)
+      const dirLight = new THREE.DirectionalLight(0xfffdf6, 1.2);
+      dirLight.position.set(5, 10, 7);
+      dirLight.castShadow = true;
+      dirLight.shadow.mapSize.width = 1024;
+      dirLight.shadow.mapSize.height = 1024;
+      dirLight.shadow.bias = -0.001;
+      scene.add(dirLight);
+
+      // Fill light (left side, soft warm)
+      const fillLight = new THREE.DirectionalLight(0xffeedd, 0.7);
+      fillLight.position.set(-6, 4, 3);
+      scene.add(fillLight);
+
+      // Rim / back light (highlights silhouette)
+      const rimLight = new THREE.DirectionalLight(0xddeeff, 0.5);
+      rimLight.position.set(0, 3, -8);
+      scene.add(rimLight);
+
+      // Bottom bounce light
+      const bounceLight = new THREE.DirectionalLight(0xffffff, 0.25);
+      bounceLight.position.set(0, -5, 3);
+      scene.add(bounceLight);
+
+      // GridHelper commented out to allow model to float purely on the web page background.
+      // const gridHelper = new THREE.GridHelper(20, 20, 0x3C6E96, 0xd9cfb7);
+      // gridHelper.position.y = -0.5;
+      // scene.add(gridHelper);
+
+      // Render loop
+      animate();
+
+      // Load character + both animations
+      loadCharacterWithAnimation('dattqg.fbx', ['dance.fbx', 'Idle Transition.fbx', 'Push Up.fbx', 'Shopping Cart Dance.fbx', 'Waving.fbx']);
+    }
+
+    // Animation state
+    let animClips = [];
+    let animActions = [];
+    let currentAnimIdx = 0;
+    let swapTimer = null;
+
+    // Load character then N animations (Mixamo workflow)
+    function loadCharacterWithAnimation(modelUrl, animUrls) {
+      showLoader('\u0110ang t\u1ea3i nh\u00e2n v\u1eadt...', '\u0110ang \u0111\u1ecdc file m\u00f4 h\u00ecnh FBX...');
+      if (currentModel) { scene.remove(currentModel); currentModel = null; }
+      if (mixer) { mixer.stopAllAction(); mixer = null; }
+      if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
+      animClips = []; animActions = [];
+
+      const fbxLoader = new THREE.FBXLoader();
+      fbxLoader.load(
+        modelUrl,
+        function (fbx) {
+          setupLoadedObject(fbx, 'FBX');
+          mixer = new THREE.AnimationMixer(currentModel);
+          let loaded = 0;
+
+          animUrls.forEach(function (url, idx) {
+            const animLoader = new THREE.FBXLoader();
+            animLoader.load(
+              url,
+              function (animFbx) {
+                if (animFbx.animations && animFbx.animations.length > 0) {
+                  const clip = animFbx.animations[0];
+                  clip.tracks.forEach(function (track) {
+                    track.name = track.name.replace(/^[^|]+\|/, '');
+                  });
+                  const action = mixer.clipAction(clip);
+                  action.clampWhenFinished = false;
+                  animClips.push(clip);
+                  animActions.push(action);
+                }
+                loaded++;
+                if (loaded === animUrls.length) {
+                  if (animActions.length > 0) {
+                    currentAnimIdx = 0;
+                    animActions[0].play();
+                    formatTag.innerText = 'FBX \u00b7 Dance';
+                    scheduleRandomSwap();
+                  }
+                  hideLoader();
+                }
+              },
+              function (xhr) {
+                var pct = xhr.total > 0 ? Math.round((xhr.loaded / xhr.total) * 100) : '...';
+                showLoader('\u0110ang t\u1ea3i anim ' + (idx + 1) + '/' + animUrls.length + '...', pct + '%');
+              },
+              function (err) {
+                console.error('Failed to load anim:', url, err);
+                loaded++;
+                if (loaded === animUrls.length && animActions.length > 0) {
+                  animActions[0].play();
+                  scheduleRandomSwap();
+                  hideLoader();
+                }
+              }
+            );
+          });
+        },
+        function (xhr) {
+          var pct = xhr.total > 0 ? Math.round((xhr.loaded / xhr.total) * 100) : '...';
+          showLoader('\u0110ang t\u1ea3i nh\u00e2n v\u1eadt...', pct + '%');
+        },
+        function (err) {
+          console.error('Failed to load model:', err);
+          showFallbackInfo();
+        }
+      );
+    }
+
+    // Pick a random DIFFERENT animation and crossfade to it
+    function swapRandomAnimation() {
+      if (animActions.length < 2) return;
+      var nextIdx;
+      do { nextIdx = Math.floor(Math.random() * animActions.length); }
+      while (nextIdx === currentAnimIdx);
+
+      var from = animActions[currentAnimIdx];
+      var to = animActions[nextIdx];
+      to.reset();
+      to.play();
+      from.crossFadeTo(to, 0.6, true);
+
+      currentAnimIdx = nextIdx;
+      var names = ['Dance', 'Idle', 'Push Up', 'Shopping Cart Dance', 'Waving'];
+      formatTag.innerText = 'FBX \u00b7 ' + (names[nextIdx] || ('Anim ' + (nextIdx + 1)));
+      scheduleRandomSwap();
+    }
+
+    // Schedule next random swap after 4\u20138 seconds
+    function scheduleRandomSwap() {
+      var delay = 4000 + Math.random() * 4000;
+      swapTimer = setTimeout(swapRandomAnimation, delay);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = clock.getDelta();
+      if (mixer) mixer.update(delta);
+      if (autoRotate && currentModel) {
+        currentModel.rotation.y += 0.006;
+      }
+      controls.update();
+      renderer.render(scene, camera);
+
+      if (currentModel) {
+        const coordsTag = document.getElementById('coords-tag');
+        if (coordsTag) {
+          coordsTag.innerText = `X: ${currentModel.position.x.toFixed(2)} Y: ${currentModel.position.y.toFixed(2)} Z: ${currentModel.position.z.toFixed(2)}`;
+        }
+      }
+    }
+
+    // Handle window resizing
+    window.addEventListener('resize', () => {
+      if (!camera || !renderer) return;
+      const width = container.clientWidth;
+      const height = 400; // Fixed visual height
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    });
+
+    // Main intelligent 3D loader
+    function loadPortfolioModel(fileUrl, customFile = null) {
+      showLoader("Đang chuẩn bị mô hình...", "Đang kiểm tra tệp tin 3D...");
+
+      // Clear previous model if exists
+      if (currentModel) {
+        scene.remove(currentModel);
+        currentModel = null;
+      }
+
+      // Try loading file
+      if (customFile) {
+        const fileName = customFile.name.toLowerCase();
+        const fileReader = new FileReader();
+
+        if (fileName.endsWith('.glb') || fileName.endsWith('.gltf')) {
+          fileReader.readAsArrayBuffer(customFile);
+          fileReader.onload = function (e) {
+            parseGLTF(e.target.result, fileName);
+          };
+        } else if (fileName.endsWith('.fbx')) {
+          fileReader.readAsArrayBuffer(customFile);
+          fileReader.onload = function (e) {
+            parseFBX(e.target.result, fileName);
+          };
+        } else if (fileName.endsWith('.obj')) {
+          fileReader.readAsText(customFile);
+          fileReader.onload = function (e) {
+            parseOBJ(e.target.result, fileName);
+          };
+        } else {
+          showError("Định dạng không hỗ trợ", "Chỉ hỗ trợ file .glb, .gltf, .fbx hoặc .obj");
+        }
+      } else {
+        // Default file dattqg.fbx. We will try GLTF first, if fails we try FBX
+        formatTag.innerText = "Đang tải...";
+
+        const gltfLoader = new THREE.GLTFLoader();
+        gltfLoader.load(
+          fileUrl,
+          function (gltf) {
+            setupLoadedObject(gltf.scene, "GLTF (GLB)");
+          },
+          function (xhr) {
+            const percent = Math.round((xhr.loaded / xhr.total) * 100);
+            showLoader("Đang tải dữ liệu...", `${percent}% hoàn thành`);
+          },
+          function (error) {
+            // GLTF failed, let's try FBX
+            console.warn("GLTFLoader failed, attempting FBXLoader...", error);
+            const fbxLoader = new THREE.FBXLoader();
+            fbxLoader.load(
+              fileUrl,
+              function (fbx) {
+                setupLoadedObject(fbx, "FBX");
+              },
+              function (xhr) {
+                const percent = Math.round((xhr.loaded / xhr.total) * 100);
+                showLoader("Thử tải dưới dạng FBX...", `${percent}% hoàn thành`);
+              },
+              function (fbxError) {
+                console.error("Both GLTF and FBX Loaders failed.", fbxError);
+                showFallbackInfo();
+              }
+            );
+          }
+        );
+      }
+    }
+
+    // Parse functions for dropped/loaded binary files
+    function parseGLTF(arrayBuffer, name) {
+      const gltfLoader = new THREE.GLTFLoader();
+      gltfLoader.parse(arrayBuffer, '', function (gltf) {
+        setupLoadedObject(gltf.scene, "Custom GLTF");
+      }, function (err) {
+        showError("Lỗi đọc GLTF/GLB", err.message);
+      });
+    }
+
+    function parseFBX(arrayBuffer, name) {
+      try {
+        const fbxLoader = new THREE.FBXLoader();
+        const fbx = fbxLoader.parse(arrayBuffer, '');
+        setupLoadedObject(fbx, "Custom FBX");
+      } catch (err) {
+        showError("Lỗi đọc FBX", err.message || "Hãy chắc chắn đây là file FBX nhị phân hợp lệ.");
+      }
+    }
+
+    function parseOBJ(text, name) {
+      showLoader("Đang dựng OBJ...", "Đang phân tích cấu trúc đa giác...");
+      try {
+        showError("Cần thư viện OBJLoader", "Vui lòng sử dụng file .glb hoặc .fbx để có kết quả tốt nhất.");
+      } catch (err) {
+        showError("Lỗi đọc OBJ", err.message);
+      }
+    }
+
+    function setupLoadedObject(object, formatName) {
+      currentModel = object;
+
+      // Step 1: compute bounding box in world space
+      let box = new THREE.Box3().setFromObject(object);
+      let size = box.getSize(new THREE.Vector3());
+      let center = box.getCenter(new THREE.Vector3());
+
+      // Step 2: scale to fit a 3.2-unit bounding box (bigger = fills canvas more)
+      const maxDim = Math.max(size.x, size.y, size.z);
+      if (maxDim > 0) {
+        const scale = 3.2 / maxDim;
+        object.scale.set(scale, scale, scale);
+      }
+
+      // Step 3: recompute box after scaling, then center the model
+      box = new THREE.Box3().setFromObject(object);
+      center = box.getCenter(new THREE.Vector3());
+      object.position.sub(center); // move pivot to world origin
+
+      // Step 4: sit model on ground (y=0)
+      box = new THREE.Box3().setFromObject(object);
+      object.position.y -= box.min.y;
+
+      // Đặt cố định vị trí nhân vật theo yêu cầu
+      object.position.set(-0.4, 0.55, -1.60);
+
+      // Step 5: traverse for shadows and fix materials
+      object.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+          if (child.material) {
+            // Support array materials
+            const mats = Array.isArray(child.material) ? child.material : [child.material];
+            mats.forEach(mat => {
+              mat.roughness = 0.8;
+              mat.metalness = 0.1;
+              mat.needsUpdate = true;
+            });
+          }
+        }
+      });
+
+      scene.add(object);
+      formatTag.innerText = formatName;
+      hideLoader();
+
+      // Adjust camera to perfectly focus and frame the model
+      box = new THREE.Box3().setFromObject(object);
+      const sphere = box.getBoundingSphere(new THREE.Sphere());
+      const radius = sphere.radius;
+      const sphereCenter = sphere.center;
+
+      // Calculate distance required to fit the sphere in the camera's FOV
+      const fov = camera.fov;
+      // We multiply by 1.15 to give a small padding around the model
+      // degToRad = degrees * Math.PI / 180
+      const halfFovRad = (fov / 2) * Math.PI / 180;
+      const dist = (radius / Math.sin(halfFovRad)) * 1.15;
+
+      camera.position.set(0, sphereCenter.y, dist);
+      camera.lookAt(0, sphereCenter.y, 0);
+      controls.target.set(0, sphereCenter.y, 0);
+
+      // Set min/max distance for OrbitControls dynamically based on model size
+      controls.minDistance = radius * 0.5;
+      controls.maxDistance = dist * 2.5;
+      controls.update();
+    }
+
+    function showLoader(title, desc) {
+      loaderOverlay.style.opacity = '1';
+      loaderOverlay.style.pointerEvents = 'auto';
+      loaderTitle.innerText = title;
+      loaderDesc.innerText = desc;
+    }
+
+    function hideLoader() {
+      loaderOverlay.style.opacity = '0';
+      loaderOverlay.style.pointerEvents = 'none';
+    }
+
+    function showError(title, desc) {
+      loaderOverlay.style.opacity = '1';
+      loaderOverlay.style.pointerEvents = 'auto';
+      loaderTitle.innerHTML = `<span style="color: var(--red-pen);">${title}</span>`;
+      loaderDesc.innerText = desc;
+    }
+
+    function showFallbackInfo() {
+      formatTag.innerText = "Fallback";
+      const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x3C6E96,
+        roughness: 0.9,
+        metalness: 0.1,
+        wireframe: false
+      });
+      const cube = new THREE.Mesh(geometry, material);
+      cube.position.y = 0.25;
+      cube.castShadow = true;
+      cube.receiveShadow = true;
+
+      const wireframe = new THREE.WireframeGeometry(geometry);
+      const line = new THREE.LineSegments(wireframe);
+      line.material.color.setHex(0x232220);
+      line.material.linewidth = 2;
+      cube.add(line);
+
+      setupLoadedObject(cube, "Khối vẽ tay (Fallback)");
+      showError(
+        "Không tải được file 3D gốc",
+        "Do bảo mật CORS trình duyệt (khi chạy offline) hoặc file bị lỗi. Trình xem đã tải hình mẫu thay thế. Bạn có thể kéo thả file 3D của mình vào bên dưới để xem thử!"
+      );
+    }
+
+    // Interactive controls and drag-drop features are disabled as requested.
+
+
+    // Initialize page on load
+    window.onload = function () {
+      try {
+        renderProjects();
+        updateStats();
+        init3D();
+      } catch (e) {
+        console.error("Initialization error:", e);
+        alert("Đã xảy ra lỗi khi khởi tạo trang: " + e.message + ". Vui lòng nhấn Ctrl + F5 để tải lại hoàn toàn.");
+      }
+    };
+  </script>
+</body>
+
+</html>
