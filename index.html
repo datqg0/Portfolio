@@ -808,37 +808,7 @@
           <!-- Rendered dynamically -->
         </div>
 
-        <!-- Add Project Card Form -->
-        <div class="add-card">
-          <h3 data-i18n="form_title">+ Phác thảo ý tưởng dự án mới</h3>
-          <form id="add-project-form">
-            <div class="form-group">
-              <label for="prj-name-input" data-i18n="form_name">Tên dự án</label>
-              <input type="text" id="prj-name-input" class="form-control" placeholder="Ví dụ: Landing Page 3D Canvas"
-                data-i18n-placeholder="form_name_placeholder" required>
-            </div>
-            <div class="form-group">
-              <label for="prj-desc-input" data-i18n="form_desc">Mô tả tóm tắt</label>
-              <textarea id="prj-desc-input" class="form-control" rows="2"
-                placeholder="Ví dụ: Thiết kế giao diện tương tác 3D dùng Three.js, phong cách tối giản."
-                data-i18n-placeholder="form_desc_placeholder" required></textarea>
-            </div>
-            <div class="form-group">
-              <label for="prj-tech-input" data-i18n="form_tech">Công nghệ / Công cụ (phân tách bằng dấu phẩy)</label>
-              <input type="text" id="prj-tech-input" class="form-control" placeholder="Ví dụ: Three.js, GSAP, CSS Grid"
-                data-i18n-placeholder="form_tech_placeholder">
-            </div>
-            <div class="form-group">
-              <label for="prj-status-input" data-i18n="form_status">Trạng thái ban đầu</label>
-              <select id="prj-status-input" class="form-control">
-                <option value="idea" data-i18n="status_idea">Ý tưởng (Idea) 💡</option>
-                <option value="doing" selected data-i18n="status_doing">Đang làm (Doing) ⚙️</option>
-                <option value="done" data-i18n="status_done">Hoàn thành (Done) ✓</option>
-              </select>
-            </div>
-            <button type="submit" class="submit-btn" data-i18n="form_submit">Đăng ký vào sổ tay</button>
-          </form>
-        </div>
+
 
       </div>
 
@@ -1061,30 +1031,33 @@
     });
 
     // Form handle
-    document.getElementById('add-project-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const title = document.getElementById('prj-name-input').value;
-      const desc = document.getElementById('prj-desc-input').value;
-      const techsInput = document.getElementById('prj-tech-input').value;
-      const status = document.getElementById('prj-status-input').value;
+    const addForm = document.getElementById('add-project-form');
+    if (addForm) {
+      addForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('prj-name-input').value;
+        const desc = document.getElementById('prj-desc-input').value;
+        const techsInput = document.getElementById('prj-tech-input').value;
+        const status = document.getElementById('prj-status-input').value;
 
-      const techs = techsInput ? techsInput.split(',').map(t => t.trim()).filter(t => t) : ["General"];
+        const techs = techsInput ? techsInput.split(',').map(t => t.trim()).filter(t => t) : ["General"];
 
-      const newPrj = {
-        id: Date.now().toString(),
-        title: { vi: title, en: title },
-        desc: { vi: desc, en: desc },
-        techs,
-        status,
-        isDraft: true
-      };
+        const newPrj = {
+          id: Date.now().toString(),
+          title: { vi: title, en: title },
+          desc: { vi: desc, en: desc },
+          techs,
+          status,
+          isDraft: true
+        };
 
-      projects.push(newPrj);
-      saveProjects();
+        projects.push(newPrj);
+        saveProjects();
 
-      // Reset form
-      e.target.reset();
-    });
+        // Reset form
+        e.target.reset();
+      });
+    }
 
 
     // ==========================================

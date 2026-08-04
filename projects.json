@@ -6,8 +6,8 @@
       "en": "LAC BLOCK"
     },
     "subtitle": {
-      "vi": "2D Puzzle Game (Solo)",
-      "en": "2D Puzzle Game (Solo)"
+      "vi": "2D Puzzle Game (Solo) · 05/2025 – 07/2025",
+      "en": "2D Puzzle Game (Solo) · 05/2025 – 07/2025"
     },
     "desc": {
       "vi": "Game giải đố khối 2D trên PC lấy cảm hứng từ Block Blast với cơ chế độc đáo.",
@@ -42,8 +42,8 @@
       "en": "LAC Fly"
     },
     "subtitle": {
-      "vi": "2D Casual Game (Solo)",
-      "en": "2D Casual Game (Solo)"
+      "vi": "2D Casual Game (Solo) · 02/2025 – 04/2025",
+      "en": "2D Casual Game (Solo) · 02/2025 – 04/2025"
     },
     "desc": {
       "vi": "Game chạy vô tận 2D điều khiển chim Lạc vượt chướng ngại vật.",
@@ -78,8 +78,8 @@
       "en": "BOMB BREAK"
     },
     "subtitle": {
-      "vi": "3D Puzzle Game (Solo)",
-      "en": "3D Puzzle Game (Solo)"
+      "vi": "3D Puzzle Game (Solo) · 2026",
+      "en": "3D Puzzle Game (Solo) · 2026"
     },
     "desc": {
       "vi": "Game gỡ bom 3D kịch tính — tìm mật khẩu, bấm nút và cắt dây đúng thứ tự.",
@@ -87,12 +87,12 @@
     },
     "bullets": {
       "vi": [
-        "Gỡ bom bằng cách giải các câu đố đơn giản nhưng căng thẳng: tìm mật khẩu đúng, nhấn nút kích hoạt và cắt dây theo đúng thứ tự. Mỗi sai lầm sẽ đưa bạn đến gần hơn với thảm họa!",
-        "Dự án tham gia GMTK Global Game Jam đầu tiên của tôi."
+        "Phát triển game giải đố gỡ bom 3D cho GMTK Global Game Jam tích hợp giải mã mật khẩu, tương tác nút bấm và cơ chế cắt dây điện.",
+        "Xây dựng hệ thống quản lý trạng thái game, xử lý tương tác vật thể 3D và logic chuyển màn chơi."
       ],
       "en": [
-        "Defuse bombs by solving simple but tense puzzles. Discover the correct password, press the activation button, and cut the wires in the right order. Every mistake brings you one step closer to disaster. Stay focused and beat every level!",
-        "My First GMTK Global Game Jam."
+        "Developed a 3D bomb-defusal puzzle game for GMTK Global Game Jam featuring password decryption, interactive button presses, and wire-cutting mechanics.",
+        "Implemented game state management, interactive 3D object handling, and level progression logic."
       ]
     },
     "techs": [
